@@ -1,35 +1,51 @@
 import { useState } from "react"
 
+interface IForm {
+    name: string;
+    age: number | null;
+    degree: boolean;
+}
+
 
 export const Form = () => {
-    const [name, setName] = useState<string>("");
-    const [age, setAge] = useState<number | undefined>();
+    const [datos, setDatos] = useState<IForm>({
+        name: '',
+        age: null,
+        degree: false
+    })
 
-    function enviar(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        const nombre = parseInt((event.target as HTMLFormElement).nombre.value);
-        const edad = parseInt((event.target as HTMLFormElement).edad.value);
-        setName(nombre);
-        setAge(edad);
-        event.currentTarget.reset();
+    function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const { name, type, value, checked } = e.target;
+
+        setDatos((valores) => ({
+            ...valores,
+            [name]: type === "checkbox"
+                ? checked : name === "age"
+                    ? value === '' ? null : Number(value)
+                    : value,
+        }))
+    }
+
+    function procesar(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        alert(`Datos Cargados: ${JSON.stringify(datos, null, 2)}`)
     }
 
     return (
         <div>
-            <form action="">
-                <label htmlFor="">Ingrese su nombre: </label>
-                <input type="text" name="nombre" /><br />
-                <label htmlFor="">Ingrese la edad: </label>
-                <input type="number" name="edad" /><br />
-                <label htmlFor="">Estudios: </label>
-                <input type="text" /><br />
-                <button onClick={enviar}>Enviar</button>
+            <form onSubmit={procesar}>
+                <label htmlFor="name">Ingrese su nombre: </label>
+                <input type="text" name="name" value={datos.name} onChange={handleOnChange} /><br />
+                <label htmlFor="age">Ingrese la edad: </label>
+                <input type="number" name="age" value={datos.age ?? ''} onChange={handleOnChange} /><br />
+                <label htmlFor="degree">Estudios: </label>
+                <input type="checkbox" name="degree" checked={datos.degree} onChange={handleOnChange} /><br />
+                <button type="submit">Enviar</button>
             </form>
             <h3>Datos ingresados</h3>
-            <label htmlFor="">Nombre: {name}</label><br />
-            <label htmlFor="">Edad: {age}</label><br />
-            <label htmlFor="">Estudios: </label>
+            <label htmlFor="">Nombre: {datos.name}</label><br />
+            <label htmlFor="">Edad: {datos.age}</label><br />
+            <label htmlFor="">Estudios: {datos.degree ? 'Con Estudios' : 'Sin Estudios'}</label>
         </div>
     )
 }
