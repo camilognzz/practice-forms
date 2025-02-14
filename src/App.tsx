@@ -1,4 +1,5 @@
 import './App.css'
+import { BinaryNumber } from './components/BinaryNumber'
 import { Form } from './components/Form'
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
   return (
    <div>
       <Form/>
+      <BinaryNumber/>
    </div>
   )
 }
