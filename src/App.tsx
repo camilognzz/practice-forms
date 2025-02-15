@@ -1,5 +1,6 @@
 import './App.css'
 import { BinaryNumber } from './components/BinaryNumber'
+import { DaysWeek } from './components/DaysWeek'
 import { Form } from './components/Form'
 import { NumberOfCaracters } from './components/NumberOfCaracters'
 
@@ -8,9 +9,10 @@ function App() {
 
   return (
    <div>
-      <Form/>
-      <BinaryNumber/>
+      <DaysWeek/>
       <NumberOfCaracters/>
+      <BinaryNumber/>
+      <Form/>
    </div>
   )
 }
