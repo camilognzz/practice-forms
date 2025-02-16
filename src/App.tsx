@@ -4,18 +4,20 @@ import { DaysWeek } from './components/DaysWeek'
 import { Degree } from './components/Degree'
 import { Form } from './components/Form'
 import { NumberOfCaracters } from './components/NumberOfCaracters'
+import { Rubros } from './components/Rubros'
 
 function App() {
-  
+
 
   return (
-   <div>
-      <Degree/>
-      <DaysWeek/>
-      <NumberOfCaracters/>
-      <BinaryNumber/>
-      <Form/>
-   </div>
+    <div>
+      <Rubros />
+      <Degree />
+      <DaysWeek />
+      <NumberOfCaracters />
+      <BinaryNumber />
+      <Form />
+    </div>
   )
 }
 
